@@ -9,12 +9,28 @@ from typing import List, Dict, Optional
 
 # OpenRouter API Configuration
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-if not OPENROUTER_API_KEY or "your-api-key-here" in OPENROUTER_API_KEY:
+if not OPENROUTER_API_KEY:
     raise ValueError(
-        "OPENROUTER_API_KEY environment variable is not set or contains placeholder values. "
+        "OPENROUTER_API_KEY environment variable is not set. "
         "Please set it in your .env file with your actual API key. "
         "Get your API key from: https://openrouter.ai/"
     )
+
+# Validate it's a valid API key format and not a placeholder
+if not OPENROUTER_API_KEY.startswith("sk-or-v1-"):
+    raise ValueError(
+        "OPENROUTER_API_KEY has invalid format. "
+        "It should start with 'sk-or-v1-'. "
+        "Get a valid API key from: https://openrouter.ai/"
+    )
+
+# Check minimum length (valid keys are typically 64+ characters)
+if len(OPENROUTER_API_KEY) < 40:
+    raise ValueError(
+        "OPENROUTER_API_KEY appears to be invalid (too short). "
+        "Please use your actual API key from: https://openrouter.ai/"
+    )
+
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # System prompt for AI Credit Advisor

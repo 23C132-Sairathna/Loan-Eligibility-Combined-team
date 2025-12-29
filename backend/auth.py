@@ -26,9 +26,9 @@ from .database import get_db
 
 # JWT Settings - Must be set via environment variables for security
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
-if not SECRET_KEY or "your-generated-secret-key-here" in SECRET_KEY:
+if not SECRET_KEY:
     raise ValueError(
-        "JWT_SECRET_KEY environment variable is not set or contains placeholder values. "
+        "JWT_SECRET_KEY environment variable is not set. "
         "Please set a strong secret key in your .env file. "
         "Generate one using: openssl rand -hex 32"
     )
