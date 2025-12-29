@@ -133,3 +133,7 @@ The frontend will be available at `http://localhost:5173`.
 
 ## Deployment
 This repository is configured to include the `.env` file for ease of setup. **Do not use these credentials in a production environment.**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
