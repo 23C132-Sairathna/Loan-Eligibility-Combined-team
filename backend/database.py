@@ -6,6 +6,14 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# Common placeholder patterns to detect (case-insensitive)
+PLACEHOLDER_PATTERNS = [
+    "your_password", "your-password", 
+    "change-me", "change_me", 
+    "placeholder", "password123",
+    "example", "test123"
+]
+
 # Get DATABASE_URL from environment - no default with credentials for security
 # Format: postgresql+asyncpg://user:password@host:port/dbname
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -17,9 +25,8 @@ if not DATABASE_URL:
     )
 
 # Validate it's not a placeholder by checking for common placeholder patterns (case-insensitive)
-placeholder_patterns = ["your_password", "your-password", "change-me", "change_me", "placeholder", "password123"]
 url_lower = DATABASE_URL.lower()
-if any(pattern in url_lower for pattern in placeholder_patterns):
+if any(pattern in url_lower for pattern in PLACEHOLDER_PATTERNS):
     raise ValueError(
         "DATABASE_URL contains placeholder values. "
         "Please replace with your actual PostgreSQL credentials in the .env file. "

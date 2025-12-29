@@ -24,7 +24,8 @@ if not OPENROUTER_API_KEY.startswith("sk-or-v1-"):
         "Get a valid API key from: https://openrouter.ai/"
     )
 
-# Check minimum length (valid keys are typically 64+ characters)
+# Check minimum length - valid keys should be at least 40 characters
+# (actual OpenRouter keys are typically 60-70 characters)
 if len(OPENROUTER_API_KEY) < 40:
     raise ValueError(
         "OPENROUTER_API_KEY appears to be invalid (too short). "
